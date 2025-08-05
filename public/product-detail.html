@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Product Detail</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="images/global-shopping-20321802.jpg" alt="ShopHub" class="logo">
+                    <span class="logo-text">ShopHub</span>
+                </a>
+                
+                <div class="nav-search">
+                    <input type="text" id="searchInput" placeholder="Search for products, brands and more...">
+                    <button class="search-btn" onclick="searchProducts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="profile.html" class="nav-link" id="userProfileLink" style="display: none;">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="cart.html" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                    <a href="#" class="nav-link" id="logoutBtn" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Product Detail Container -->
+        <div class="product-detail-container" id="productDetailContainer">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+
+        <!-- Product Review Section -->
+        <div class="reviews-section">
+            <h3 class="section-title">Customer Reviews</h3>
+            <div id="reviewsContainer" class="reviews-container">
+                <!-- Reviews will be dynamically inserted here -->
+                <p id="noReviewsMessage" style="display: none; text-align: center;">No reviews yet. Be the first to review!</p>
+            </div>
+            
+            <div id="addReviewSection" class="add-review-section" style="display: none;">
+                <h4 class="section-title">Add a Review</h4>
+                <div id="reviewAlert" class="error-message" style="display: none;"></div>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <div class="rating-stars" id="reviewRating">
+                            <span class="star" data-rating="1">&#9733;</span>
+                            <span class="star" data-rating="2">&#9733;</span>
+                            <span class="star" data-rating="3">&#9733;</span>
+                            <span class="star" data-rating="4">&#9733;</span>
+                            <span class="star" data-rating="5">&#9733;</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Review</label>
+                        <textarea id="reviewText" name="reviewText" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            // Load product details based on URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            if (productId) {
+                loadProductDetail(productId);
+            } else {
+                // Redirect to 404 page if no product ID is found
+                window.location.href = '404.html';
+            }
+        });
+    </script>
+</body>
+</html>

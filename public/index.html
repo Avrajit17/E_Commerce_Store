@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Your Ultimate Shopping Destination</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="images/global-shopping-20321802.jpg" alt="ShopHub" class="logo">
+                    <span class="logo-text">ShopHub</span>
+                </div>
+                
+                <div class="nav-search">
+                    <input type="text" id="searchInput" placeholder="Search for products, brands and more...">
+                    <button class="search-btn" onclick="searchProducts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                    <a href="cart.html" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <a href="#" class="nav-link" id="profileBtn" style="display: none;">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">Profile</span>
+                    </a>
+                    <button class="logout-btn" id="logoutBtn" style="display: none;" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <div class="nav-container">
+                <div class="categories">
+                    <a href="#" class="category-link" data-category="all">All Products</a>
+                    <a href="#" class="category-link" data-category="laptop">Laptops</a>
+                    <a href="#" class="category-link" data-category="accessories">Accessories</a>
+                    <a href="#" class="category-link" data-category="phone">Phones</a>
+                    <a href="#" class="category-link" data-category="books">Books</a>
+                    <a href="#" class="category-link" data-category="men">Men's Fashion</a>
+                    <a href="#" class="category-link" data-category="daily need">Daily Needs</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to ShopHub</h1>
+                <p class="hero-subtitle">Discover amazing products at unbeatable prices</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToProducts()">Shop Now</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='signup.html'">Join Now</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/product image 1.png" alt="Shopping">
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card" data-category="laptop">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Laptops</h3>
+                    <p>High-performance laptops</p>
+                </div>
+                <div class="category-card" data-category="phone">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Smartphones</h3>
+                    <p>Latest mobile phones</p>
+                </div>
+                <div class="category-card" data-category="accessories">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Accessories</h3>
+                    <p>Tech accessories</p>
+                </div>
+                <div class="category-card" data-category="books">
+                    <i class="fas fa-book"></i>
+                    <h3>Books</h3>
+                    <p>Educational & fiction</p>
+                </div>
+                <div class="category-card" data-category="men">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Fashion</h3>
+                    <p>Men's clothing</p>
+                </div>
+                <div class="category-card" data-category="daily need">
+                    <i class="fas fa-shopping-basket"></i>
+                    <h3>Daily Needs</h3>
+                    <p>Household essentials</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="productsSection">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="product-filters">
+                    <select id="sortSelect" onchange="sortProducts()">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="loading" id="productsLoading">
+                <img src="images/loader.gif" alt="Loading...">
+                <p>Loading products...</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+            
+            <div class="no-products" id="noProducts" style="display: none;">
+                <img src="images/no-products-found.9bcb4cee4917.png" alt="No products">
+                <h3>No products found</h3>
+                <p>Try adjusting your search or filters</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose ShopHub?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>Quick and reliable delivery to your doorstep</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Shopping</h3>
+                    <p>Your data and payments are completely secure</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-undo"></i>
+                    <h3>Easy Returns</h3>
+                    <p>Hassle-free returns within 30 days</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/shopping-center-logo-design-template_145155-1624.jpg" alt="ShopHub">
+                        <span>ShopHub</span>
+                    </div>
+                    <p>Your ultimate shopping destination for quality products at the best prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="#" onclick="filterByCategory('laptop')">Laptops</a></li>
+                        <li><a href="#" onclick="filterByCategory('phone')">Phones</a></li>
+                        <li><a href="#" onclick="filterByCategory('accessories')">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Account</h3>
+                    <ul>
+                        <li><a href="login.html">Sign In</a></li>
+                        <li><a href="signup.html">Create Account</a></li>
+                        <li><a href="profile.html">My Account</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Choose Login Type</h2>
+            <div class="login-options">
+                <button class="btn btn-primary" onclick="window.location.href='login.html?type=user'">
+                    <i class="fas fa-user"></i>
+                    Customer Login
+                </button>
+                <button class="btn btn-secondary" onclick="window.location.href='login.html?type=admin'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin Login
+                </button>
+                <button class="btn btn-accent" onclick="window.location.href='login.html?type=delivery'">
+                    <i class="fas fa-truck"></i>
+                    Delivery Login
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Initialize the homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            loadFeaturedProducts();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>

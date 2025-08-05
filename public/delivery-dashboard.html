@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Delivery Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="images/global-shopping-20321802.jpg" alt="ShopHub" class="logo">
+                    <span class="logo-text">ShopHub</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="#" class="nav-link" id="deliveryProfileLink">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#" class="nav-link" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Delivery Dashboard</h2>
+
+        <div class="dashboard-container">
+            <div class="dashboard-sidebar">
+                <button class="dashboard-nav-btn active" data-tab="assignedOrders">
+                    <i class="fas fa-truck"></i> Assigned Orders
+                </button>
+                <button class="dashboard-nav-btn" data-tab="deliveryHistory">
+                    <i class="fas fa-history"></i> Delivery History
+                </button>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Assigned Orders Tab -->
+                <div id="assignedOrders" class="dashboard-tab-content active">
+                    <h3 class="section-title">Your Assigned Orders</h3>
+                    <div id="assignedOrdersContainer" class="orders-container">
+                        <!-- Assigned orders will be dynamically inserted here -->
+                    </div>
+                    <div id="noAssignedOrdersMessage" class="empty-state-message" style="display: none;">
+                        <p>No new orders assigned to you.</p>
+                    </div>
+                </div>
+
+                <!-- Delivery History Tab -->
+                <div id="deliveryHistory" class="dashboard-tab-content">
+                    <h3 class="section-title">Delivery History</h3>
+                    <div id="deliveryHistoryContainer" class="orders-container">
+                        <!-- Completed orders will be dynamically inserted here -->
+                    </div>
+                    <div id="noDeliveryHistoryMessage" class="empty-state-message" style="display: none;">
+                        <p>You have not completed any deliveries yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            setupDashboardTabs();
+        });
+    </script>
+</body>
+</html>
